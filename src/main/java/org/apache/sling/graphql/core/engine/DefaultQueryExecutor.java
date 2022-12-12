@@ -205,7 +205,9 @@ public class DefaultQueryExecutor implements QueryExecutor {
                 LOGGER.debug("Executing query\n[{}]\nat [{}] with variables [{}]",
                         cleanLog.sanitize(query), queryResource.getPath(), cleanLog.sanitize(variables.toString()));
             }
+            LOGGER.info("Default Query About to Execute GraphQL" + System.currentTimeMillis());
             final ExecutionResult result = graphQL.execute(ctx.input);
+            LOGGER.info("Default Query Completed Execute GraphQL" + System.currentTimeMillis());
             if (!result.getErrors().isEmpty()) {
                 StringBuilder errors = new StringBuilder();
                 for (GraphQLError error : result.getErrors()) {

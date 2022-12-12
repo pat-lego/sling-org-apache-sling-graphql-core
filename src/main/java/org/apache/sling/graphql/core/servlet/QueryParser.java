@@ -105,7 +105,10 @@ public class QueryParser {
             variables = Collections.emptyMap();
         }
         if (query != null) {
-            return new Result(query, variables);
+            LOGGER.info("About to get a RESULT " + System.currentTimeMillis());
+            Result result = new Result(query, variables);
+            LOGGER.info("Got a RESULT " + System.currentTimeMillis());
+            return result;
         }
         return null;
     }

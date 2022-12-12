@@ -277,7 +277,9 @@ public class GraphQLServlet extends SlingAllMethodsServlet {
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST);
                 }
             } else {
+                LOGGER.info("About to call execute " + System.currentTimeMillis());
                 execute(request.getResource(), request, response);
+                LOGGER.info("Called execute " + System.currentTimeMillis());
             }
         } finally {
             requestTimerContext.stop();
@@ -308,7 +310,9 @@ public class GraphQLServlet extends SlingAllMethodsServlet {
     private void execute(Resource resource, SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException {
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
+        LOGGER.info("About to call QueryParser " + System.currentTimeMillis());
         final QueryParser.Result result = QueryParser.fromRequest(request);
+        LOGGER.info("Called QueryParser " + System.currentTimeMillis());
         if (result == null) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
